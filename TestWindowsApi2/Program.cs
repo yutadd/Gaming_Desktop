@@ -10,23 +10,16 @@ namespace TestWindowsApi2
         static void Main(string[] args)
         {
             Color c = new Color();
-            
-            for(int i=0; ;i++ )
+            var rand = new Random();
+            for (int i=0; ;i++ )
             {
-                int r = 0;
-                int g = 0;
-                int b = 0;
-                for ( r = 0; r < 255; r++)
-                {
-                    for ( g = 0; g < 255; g++)
-                    {
-                        for ( b = 0; b < 255; b++)
-                        {
-                            SetColor(Color.FromArgb(r, g, b));
-                            //Thread.Sleep(0);
-                        }
-                    }
-                }
+                int r = rand.Next(0,255);
+                int g = rand.Next(0, 255); ;
+                int b = rand.Next(0, 255); ;
+               
+                SetColor(Color.FromArgb(r, g, b));
+                //Thread.Sleep(0);
+          
             }
         }
         public static void SetColor(Color color)
@@ -48,7 +41,6 @@ namespace TestWindowsApi2
             RegistryKey key = Registry.CurrentUser.OpenSubKey("Control Panel\\Colors", true);
             key.SetValue(@"Background", string.Format("{0} {1} {2}", color.R, color.G, color.B));
         }
-
         private static class NativeMethods
         {
             public const int COLOR_DESKTOP = 1;
